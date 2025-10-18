@@ -52,44 +52,31 @@ it indicates a **potential concept drift** in the data-generating process.
 
 Let the relationship between target `y` and features `X` be modeled as:
 
-\[
-y = X\beta + \epsilon
-\]
+**y = Xβ + ε**
 
 Where:
-- \( X \): Feature matrix  
-- \( \beta \): Coefficient vector  
-- \( \epsilon \): Random noise term
+- **X**: Feature matrix  
+- **β**: Coefficient vector  
+- **ε**: Random noise term
 
 We fit two models:
 
-\[
-\hat{\beta}_{train} = (X_{train}^T X_{train})^{-1} X_{train}^T y_{train}
-\]
+**β̂_train = (X_trainᵀ X_train)⁻¹ X_trainᵀ y_train**
 
-\[
-\hat{\beta}_{prod} = (X_{prod}^T X_{prod})^{-1} X_{prod}^T y_{prod}
-\]
+**β̂_prod = (X_prodᵀ X_prod)⁻¹ X_prodᵀ y_prod**
 
 Then compute:
-\[
-\Delta \beta = \hat{\beta}_{prod} - \hat{\beta}_{train}
-\]
+**Δβ = β̂_prod - β̂_train**
 
 To statistically test if the difference is significant:
 
-\[
-Z_i = \frac{\hat{\beta}_{prod,i} - \hat{\beta}_{train,i}}{\sqrt{SE_{train,i}^2 + SE_{prod,i}^2}}
-\]
+**Z_i = (β̂_prod,i - β̂_train,i) / √(SE_train,i² + SE_prod,i²)**
 
-Where \( SE \) is the standard error of each coefficient.
+Where **SE** is the standard error of each coefficient.
 
 The two-tailed p-value is computed as:
 
-\[
-p_i = 2(1 - \Phi(|Z_i|))
-\]
-
+**p_i = 2(1 - Φ(|Z_i|))**
 ---
 
 ## Algorithm Overview
