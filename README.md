@@ -182,6 +182,7 @@ print(result["z_test"])
 print("L2 Distance:", result["l2_distance"])
 ```
 Here, the production dataset has a different internal structure, and the drift detector highlights this through coefficient divergence. The output is similar to regression. 
+
 ---
 ## Output Details
 
@@ -204,6 +205,7 @@ Low p-values (< 0.05): statistically significant coefficient drift
 Large Δβ: feature relationship changed
 
 Stable coefficients: no significant drift
+
 ---
 ## When to Use
 
@@ -214,6 +216,7 @@ Detect data drift when retraining is expensive
 Quantify how much internal data relationship has changed
 
 Build interpretability into data drift detection pipelines
+
 ---
 ## Limitations
 
@@ -224,6 +227,7 @@ Requires same feature dimensionality (`X_train.shape == X_prod.shape`)
 Sensitive to scaling (consider standardizing features)
 
 Works best as a proxy detector, may not as a perfect substitute for full statistical drift tests
+
 ---
 ## License
 
