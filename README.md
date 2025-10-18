@@ -52,31 +52,45 @@ it indicates a **potential concept drift** in the data-generating process.
 
 Let the relationship between target `y` and features `X` be modeled as:
 
-**y = Xβ + ε**
+$$
+y = X\beta + \epsilon
+$$
 
 Where:
-- **X**: Feature matrix  
-- **β**: Coefficient vector  
-- **ε**: Random noise term
+- $X$: Feature matrix  
+- $\beta$: Coefficient vector  
+- $\epsilon$: Random noise term
 
 We fit two models:
 
-**β̂_train = (X_trainᵀ X_train)⁻¹ X_trainᵀ y_train**
+$$
+\hat{\beta}_{train} = (X_{train}^T X_{train})^{-1} X_{train}^T y_{train}
+$$
 
-**β̂_prod = (X_prodᵀ X_prod)⁻¹ X_prodᵀ y_prod**
+$$
+\hat{\beta}_{prod} = (X_{prod}^T X_{prod})^{-1} X_{prod}^T y_{prod}
+$$
 
 Then compute:
-**Δβ = β̂_prod - β̂_train**
+
+$$
+\Delta \beta = \hat{\beta}_{prod} - \hat{\beta}_{train}
+$$
 
 To statistically test if the difference is significant:
 
-**Z_i = (β̂_prod,i - β̂_train,i) / √(SE_train,i² + SE_prod,i²)**
+$$
+Z_i = \frac{\hat{\beta}_{prod,i} - \hat{\beta}_{train,i}}{\sqrt{SE_{train,i}^2 + SE_{prod,i}^2}}
+$$
 
-Where **SE** is the standard error of each coefficient.
+Where $SE$ is the standard error of each coefficient.
 
 The two-tailed p-value is computed as:
 
-**p_i = 2(1 - Φ(|Z_i|))**
+$$
+p_i = 2(1 - \Phi(|Z_i|))
+$$
+
 ---
 
 ## Algorithm Overview
@@ -136,6 +150,8 @@ print("L2 Distance:", result["l2_distance"])
 
 **Interpretation**: Significant p-values (< 0.05) and large L2 distance indicate a strong concept drift.
 
+--- 
+
 ## Example (Classification)
 Even for classification tasks, OLS can be used as a proxy detector for internal data structure shifts.
 
@@ -166,7 +182,7 @@ print(result["z_test"])
 print("L2 Distance:", result["l2_distance"])
 ```
 Here, the production dataset has a different internal structure, and the drift detector highlights this through coefficient divergence. The output is similar to regression. 
-
+---
 ## Output Details
 
 The function returns a dictionary:
@@ -188,7 +204,7 @@ Low p-values (< 0.05): statistically significant coefficient drift
 Large Δβ: feature relationship changed
 
 Stable coefficients: no significant drift
-
+---
 ## When to Use
 
 Monitor deployed regression or classification models
@@ -198,7 +214,7 @@ Detect data drift when retraining is expensive
 Quantify how much internal data relationship has changed
 
 Build interpretability into data drift detection pipelines
-
+---
 ## Limitations
 
 OLS assumes a linear relationship — may not match nonlinear models
@@ -208,7 +224,7 @@ Requires same feature dimensionality (`X_train.shape == X_prod.shape`)
 Sensitive to scaling (consider standardizing features)
 
 Works best as a proxy detector, may not as a perfect substitute for full statistical drift tests
-
+---
 ## License
 
 MIT License © 2025
