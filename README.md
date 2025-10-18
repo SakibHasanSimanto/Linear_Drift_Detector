@@ -1,4 +1,4 @@
-# 🧭 Linear Drift Detector
+# Linear Drift Detector
 
 A lightweight, explainable **concept drift detection** library based on **linear coefficient analysis** using OLS (Ordinary Least Squares).  
 This package is designed for both **regression** and **classification** models to detect when the underlying data relationship between features and targets has changed over time — i.e., when **concept drift** occurs.
